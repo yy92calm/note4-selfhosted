@@ -1,0 +1,11 @@
+# ZECTRIX NOTE4 原生分区表（与设备实测逐字节对齐）
+# 该表必须与机器上 0x8000 处的分区表完全一致：
+#   只把应用镜像写进 ota_1(0x610000)，不改分区表、不动 nvs / assets。
+#
+# Name,   Type, SubType, Offset,   Size,     Flags
+nvs,      data, nvs,     0x9000,   0x4000,
+otadata,  data, ota,     0xd000,   0x2000,
+phy_init, data, phy,     0xf000,   0x1000,
+ota_0,    app,  ota_0,   0x20000,  0x5F0000,
+ota_1,    app,  ota_1,   0x610000, 0x5F0000,
+assets,   data, spiffs,  0xc00000, 0x400000,

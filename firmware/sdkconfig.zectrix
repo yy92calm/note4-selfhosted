@@ -1,0 +1,26 @@
+# ZECTRIX NOTE4 自研 ota_1 固件专用覆盖项
+# 用法（在 firmware-src/xiaozhi-zectrix 下）：
+#   export SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.defaults.esp32s3;sdkconfig.zectrix"
+#   idf.py -B build_ota1 -DIDF_TARGET=esp32s3 build
+
+CONFIG_IDF_TARGET="esp32s3"
+
+# 板卡：ZECTRIX NOTE4 4.2 寸黑白墨水屏（本仓库原本未接线，已在本 fork 补上）
+CONFIG_BOARD_TYPE_ZECTRIX_S3_EPAPER_4_2=y
+
+# 分区表：与设备实测逐字节对齐（ota_0/ota_1 各 6080KB，assets 4096KB）
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions/16m_zectrix.csv"
+CONFIG_PARTITION_TABLE_OFFSET=0x8000
+
+# 服务端：改成你自己的服务器地址（明文 HTTP + 明文 WS，不需要证书）
+CONFIG_OTA_URL="http://192.168.1.100:12900/xiaozhi/ota/"
+
+# 中文界面
+CONFIG_LANGUAGE_ZH_CN=y
+
+# 墨水屏显示风格：默认+多行（来自板卡 config.json 的 sdkconfig_append，
+# 手工构建时不会自动应用，这里显式写上）
+CONFIG_USE_DEFAULT_MESSAGE_STYLE=y
+CONFIG_USE_WECHAT_MESSAGE_STYLE=n
+CONFIG_USE_MULTILINE_CHAT_MESSAGE=y

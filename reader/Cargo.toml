@@ -1,0 +1,18 @@
+[package]
+name = "note4-reader"
+version = "0.1.0"
+edition = "2024"
+description = "ZECTRIX NOTE4 墨水屏小说阅读器（主机渲染 + 本地推送）"
+
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "signal", "io-util", "net"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+ab_glyph = "0.2"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+anyhow = "1"
+
+[profile.release]
+opt-level = 3

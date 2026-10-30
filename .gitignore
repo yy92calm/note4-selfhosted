@@ -1,0 +1,21 @@
+# 构建产物
+build/
+build_*/
+managed_components/
+dependencies.lock
+sdkconfig
+sdkconfig.old
+releases/
+
+# 运行时数据
+server/data/
+server/logs/*.jsonl
+*.log
+
+# 本地环境
+.env
+.venv/
+__pycache__/
+.DS_Store
+# Rust
+reader/target/

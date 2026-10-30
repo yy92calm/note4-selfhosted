@@ -1,0 +1,14 @@
+[Unit]
+Description=NOTE4 self-hosted server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/note4-server
+Environment=PUBLIC_HOST=your.domain.example
+ExecStart=/usr/bin/python3 /opt/note4-server/app.py --port 12900
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

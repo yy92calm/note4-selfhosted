@@ -1,0 +1,13 @@
+#!/bin/bash
+# 从本机同步代码到服务器并重启（示例，按需修改）
+set -e
+HOST="user@your-server.example"
+KEY="$HOME/.ssh/your-key.pem"
+REMOTE="~/note4-server"
+
+rsync -av -e "ssh -i $KEY" \
+  app.py requirements.txt restart.sh \
+  "$HOST:$REMOTE/"
+
+ssh -i "$KEY" "$HOST" "cd $REMOTE && ./restart.sh"
+curl -s "http://your-server.example:12900/healthz" && echo
